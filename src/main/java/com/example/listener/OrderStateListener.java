@@ -16,16 +16,14 @@ import org.springframework.stereotype.Component;
 public class OrderStateListener {
 
     @OnTransition(source = "WAIT_PAY", target = "PAID")
-    public boolean deliverTransition(Message<OrderStateEvent> message) {
+    public void deliverTransition(Message<OrderStateEvent> message) throws Exception {
         log.info(message.getPayload().name());
         log.info(message.getHeaders().get("order").toString());
         System.out.println("待支付 --支付--> 已支付");
-        return true;
     }
 
     @OnTransition(source = "PAID", target = "RECIVED")
-    public boolean receiveTransition(Message<OrderStateEvent> message) {
+    public void receiveTransition(Message<OrderStateEvent> message) {
         System.out.println("待收货 --收货--> 完成");
-        return true;
     }
 }

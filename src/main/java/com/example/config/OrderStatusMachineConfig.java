@@ -73,7 +73,7 @@ public class OrderStatusMachineConfig extends StateMachineConfigurerAdapter<Orde
                 //读取持久化数据返回，此处先返回Order中的数据
                 return orderMap.containsKey(order.getId()) ?
                         new DefaultStateMachineContext<>(orderMap.get(order.getId()), null, null, null) :
-                        new DefaultStateMachineContext<>(order.getStatus(), null, null, null);
+                        new DefaultStateMachineContext<>(OrderState.WAIT_PAY, null, null, null);
             }
         });
     }
